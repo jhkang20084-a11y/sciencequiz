@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- 스마트폰에서도 화면 크기에 맞게 보이도록 하는 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>두근두근 과학 퀴즈</title>
+
+  <!-- 둥근 느낌의 한글 웹폰트 (Jua: 제목용, Gowun Dodum: 본문용) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap" rel="stylesheet">
+
+  <!-- 디자인 파일 연결 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+
+    <!-- ========== 1. 시작 화면 ========== -->
+    <section id="start-screen" class="screen card active">
+      <div class="big-emoji">🔬</div>
+      <h1>두근두근 과학 퀴즈</h1>
+      <p class="guide">
+        제한 시간 <b>60초</b> 동안 과학 문제를 최대한 많이 풀어봐요!<br>
+        한 문제 맞히면 <b>10점</b> ⭐<br>
+        연속으로 맞히면 <b>콤보</b>가 쌓여요! 🔥
+      </p>
+      <button id="start-btn" class="btn btn-main" type="button">시작하기 ✨</button>
+    </section>
+
+    <!-- ========== 2. 퀴즈 화면 ========== -->
+    <section id="quiz-screen" class="screen card">
+      <!-- 위쪽 상태판: 남은 시간 / 점수 / 콤보 -->
+      <div class="status-bar">
+        <div class="status-box">
+          <span class="status-label">⏱ 남은 시간</span>
+          <span id="timer-text" class="status-value timer">60</span>
+        </div>
+        <div class="status-box">
+          <span class="status-label">⭐ 점수</span>
+          <span id="score-text" class="status-value">0</span>
+        </div>
+        <div class="status-box">
+          <span class="status-label">🔥 콤보</span>
+          <span id="combo-text" class="status-value">0</span>
+        </div>
+      </div>
+
+      <!-- 남은 시간 막대 (시간이 줄어들수록 짧아져요) -->
+      <div class="progress-bar" role="progressbar" aria-label="남은 시간" aria-valuemin="0" aria-valuemax="60">
+        <div id="time-fill" class="progress-fill"></div>
+      </div>
+
+      <p id="question-num" class="question-num">1번째 문제</p>
+      <h2 id="question-text" class="question">문제가 여기에 나와요</h2>
+
+      <!-- 보기 버튼 4개는 script.js가 자동으로 만들어서 넣어요 -->
+      <div id="choices" class="choices"></div>
+
+      <!-- 정답/오답 안내 문구 (aria-live: 화면 읽기 프로그램도 바로 읽어줘요) -->
+      <p id="feedback" class="feedback" aria-live="polite"></p>
+
+      <button id="next-btn" class="btn btn-main" type="button" disabled>다음 ▶</button>
+    </section>
+
+    <!-- ========== 3. 결과 화면 (타임오버) ========== -->
+    <section id="result-screen" class="screen card">
+      <div class="big-emoji">⏰</div>
+      <h2 class="time-over">타임오버!</h2>
+      <p id="result-message" class="result-message">잘했어요!</p>
+
+      <!-- 최종 점수와 최대 콤보 -->
+      <div class="result-grid">
+        <div class="result-box">
+          <span class="result-label">최종 점수</span>
+          <span class="result-big"><span id="result-score">0</span>점</span>
+        </div>
+        <div class="result-box combo">
+          <span class="result-label">최대 콤보</span>
+          <span class="result-big"><span id="result-combo">0</span>콤보</span>
+        </div>
+      </div>
+      <p id="result-count" class="result-count">0문제 중 0문제 정답!</p>
+
+      <!-- 틀린 문제 다시 보기 -->
+      <div id="review" class="review"></div>
+
+      <button id="retry-btn" class="btn btn-main" type="button">다시 풀기 🔄</button>
+    </section>
+
+  </main>
+
+  <!-- 동작 파일 연결 (맨 아래에 두어야 화면이 먼저 만들어진 뒤 실행돼요) -->
+  <script src="script.js"></script>
+</body>
+</html>
